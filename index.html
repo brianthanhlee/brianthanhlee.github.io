@@ -1,0 +1,2622 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Brian Lee | Tech, Coding & Data Portfolio</title>
+
+  <style>
+    :root {
+      --bg: #02040a;
+      --panel: rgba(8, 18, 32, 0.76);
+      --panel-strong: rgba(10, 25, 45, 0.9);
+      --line: rgba(56, 189, 248, 0.28);
+      --line-soft: rgba(148, 163, 184, 0.16);
+      --text: #eef7ff;
+      --muted: #8fa7bf;
+      --cyan: #38e8ff;
+      --blue: #3b82f6;
+      --gold: #f7c948;
+      --orange: #fb923c;
+      --red: #fb7185;
+      --green: #34d399;
+      --shadow: 0 28px 90px rgba(0, 0, 0, 0.55);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -5;
+      background:
+        radial-gradient(circle at 18% 16%, rgba(56, 232, 255, 0.20), transparent 28%),
+        radial-gradient(circle at 85% 20%, rgba(247, 201, 72, 0.10), transparent 25%),
+        radial-gradient(circle at 55% 88%, rgba(59, 130, 246, 0.16), transparent 34%),
+        linear-gradient(135deg, #02040a, #07111f 45%, #030712);
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -4;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(56, 232, 255, 0.045) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(56, 232, 255, 0.045) 1px, transparent 1px),
+        linear-gradient(rgba(255, 255, 255, 0.018) 50%, transparent 50%);
+      background-size: 54px 54px, 54px 54px, 100% 6px;
+      mask-image: linear-gradient(to bottom, black, transparent 92%);
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      font: inherit;
+    }
+
+    .container {
+      width: min(1180px, 92%);
+      margin: 0 auto;
+    }
+
+    .scan-line {
+      position: fixed;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, rgba(56, 232, 255, 0.75), transparent);
+      box-shadow: 0 0 24px rgba(56, 232, 255, 0.55);
+      z-index: 3000;
+      pointer-events: none;
+      animation: scan 5s linear infinite;
+      opacity: 0.45;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(2, 4, 10, 0.78);
+      border-bottom: 1px solid rgba(56, 232, 255, 0.22);
+      backdrop-filter: blur(18px);
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.35);
+    }
+
+    .nav-wrap {
+      min-height: 82px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      white-space: nowrap;
+    }
+
+    .reactor-logo {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      color: white;
+      font-weight: 900;
+      border: 1px solid rgba(56, 232, 255, 0.55);
+      background:
+        radial-gradient(circle, rgba(255,255,255,0.95) 0 8%, rgba(56,232,255,0.9) 9% 18%, rgba(59,130,246,0.25) 19% 45%, transparent 46%),
+        conic-gradient(from 0deg, rgba(56,232,255,0.85), rgba(247,201,72,0.7), rgba(56,232,255,0.85));
+      box-shadow: 0 0 26px rgba(56, 232, 255, 0.55), inset 0 0 22px rgba(255,255,255,0.22);
+      animation: reactorSpin 8s linear infinite;
+    }
+
+    .logo-text {
+      font-weight: 950;
+      letter-spacing: -0.6px;
+      font-size: 1.28rem;
+    }
+
+    .logo-text span {
+      color: var(--cyan);
+      text-shadow: 0 0 18px rgba(56, 232, 255, 0.75);
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    nav a {
+      color: #dbeafe;
+      font-size: 0.92rem;
+      letter-spacing: 0.2px;
+      position: relative;
+      transition: 0.25s ease;
+      white-space: nowrap;
+    }
+
+    nav a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -9px;
+      width: 0;
+      height: 2px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, var(--cyan), var(--gold));
+      box-shadow: 0 0 14px rgba(56, 232, 255, 0.7);
+      transition: width 0.25s ease;
+    }
+
+    nav a:hover,
+    nav a.active {
+      color: white;
+      text-shadow: 0 0 12px rgba(56, 232, 255, 0.5);
+    }
+
+    nav a:hover::after,
+    nav a.active::after {
+      width: 100%;
+    }
+
+    .nav-cta {
+      padding: 10px 16px;
+      border-radius: 999px;
+      border: 1px solid rgba(56, 232, 255, 0.4);
+      background: rgba(56, 232, 255, 0.08);
+    }
+
+    .xp-mini {
+      min-width: 160px;
+      padding: 8px 10px;
+      border-radius: 14px;
+      border: 1px solid rgba(247, 201, 72, 0.25);
+      background: rgba(247, 201, 72, 0.07);
+      color: #fff7cc;
+      font-size: 0.78rem;
+      font-weight: 900;
+      box-shadow: inset 0 0 18px rgba(247, 201, 72, 0.05);
+    }
+
+    .xp-mini-bar {
+      height: 5px;
+      background: rgba(2, 6, 23, 0.78);
+      border-radius: 999px;
+      overflow: hidden;
+      margin-top: 5px;
+    }
+
+    .xp-mini-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--gold), var(--orange));
+      box-shadow: 0 0 18px rgba(247, 201, 72, 0.55);
+      transition: width 0.5s ease;
+    }
+
+    section {
+      padding: 96px 0;
+      scroll-margin-top: 96px;
+      position: relative;
+    }
+
+    .hero {
+      min-height: calc(100vh - 82px);
+      display: grid;
+      align-items: center;
+      padding: 90px 0 110px;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      width: 720px;
+      height: 720px;
+      border-radius: 50%;
+      right: -240px;
+      top: 50%;
+      transform: translateY(-50%);
+      background:
+        radial-gradient(circle, transparent 0 18%, rgba(56,232,255,0.08) 19% 19.5%, transparent 20% 34%, rgba(247,201,72,0.08) 35% 35.5%, transparent 36% 52%, rgba(56,232,255,0.07) 53% 53.4%, transparent 54%),
+        conic-gradient(from 180deg, transparent, rgba(56,232,255,0.15), transparent, rgba(247,201,72,0.10), transparent);
+      animation: slowRotate 28s linear infinite;
+      opacity: 0.75;
+      pointer-events: none;
+    }
+
+    .orb {
+      position: absolute;
+      border-radius: 999px;
+      filter: blur(24px);
+      opacity: 0.65;
+      pointer-events: none;
+      animation: float 7s ease-in-out infinite;
+    }
+
+    .orb.one {
+      width: 150px;
+      height: 150px;
+      background: rgba(56, 232, 255, 0.28);
+      top: 110px;
+      left: 7%;
+    }
+
+    .orb.two {
+      width: 210px;
+      height: 210px;
+      background: rgba(247, 201, 72, 0.12);
+      right: 8%;
+      bottom: 70px;
+      animation-delay: 1s;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 58px;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .system-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 9px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(56, 232, 255, 0.34);
+      background: rgba(56, 232, 255, 0.08);
+      color: #c7fbff;
+      margin-bottom: 24px;
+      font-weight: 800;
+      font-size: 0.9rem;
+      box-shadow: 0 0 30px rgba(56, 232, 255, 0.08);
+      animation: fadeUp 0.7s ease both;
+    }
+
+    .pulse {
+      width: 9px;
+      height: 9px;
+      border-radius: 999px;
+      background: var(--green);
+      box-shadow: 0 0 0 rgba(52, 211, 153, 0.7);
+      animation: pulse 1.8s infinite;
+    }
+
+    .hero h1 {
+      font-size: clamp(3rem, 7vw, 5.75rem);
+      line-height: 0.96;
+      letter-spacing: -4px;
+      margin-bottom: 26px;
+      animation: fadeUp 0.8s 0.08s ease both;
+    }
+
+    .gradient-text {
+      background: linear-gradient(90deg, white, var(--cyan), var(--gold), white);
+      background-size: 260% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: gradientMove 5s linear infinite;
+      text-shadow: 0 0 40px rgba(56, 232, 255, 0.35);
+    }
+
+    .type-line {
+      min-height: 30px;
+      color: #bdf9ff;
+      font-weight: 900;
+      letter-spacing: 1px;
+      margin-bottom: 18px;
+      text-transform: uppercase;
+      font-size: 0.88rem;
+    }
+
+    .hero p {
+      color: #cbdced;
+      font-size: 1.08rem;
+      max-width: 690px;
+      margin-bottom: 32px;
+      animation: fadeUp 0.8s 0.16s ease both;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      animation: fadeUp 0.8s 0.24s ease both;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 13px 20px;
+      border-radius: 4px;
+      font-weight: 900;
+      cursor: pointer;
+      border: none;
+      position: relative;
+      transition: 0.25s ease;
+      clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+    }
+
+    .btn-primary {
+      color: #021018;
+      background: linear-gradient(90deg, var(--cyan), #93f8ff, var(--gold));
+      box-shadow: 0 0 30px rgba(56, 232, 255, 0.35), 0 18px 45px rgba(0, 0, 0, 0.35);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 0 44px rgba(56, 232, 255, 0.55), 0 24px 60px rgba(0, 0, 0, 0.5);
+    }
+
+    .btn-secondary {
+      color: #dffaff;
+      background: rgba(8, 18, 32, 0.72);
+      border: 1px solid rgba(56, 232, 255, 0.28);
+    }
+
+    .btn-secondary:hover {
+      color: white;
+      transform: translateY(-4px);
+      background: rgba(15, 35, 58, 0.95);
+      box-shadow: 0 0 24px rgba(56, 232, 255, 0.18);
+    }
+
+    .tech-strip {
+      margin-top: 26px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      animation: fadeUp 0.8s 0.32s ease both;
+    }
+
+    .tech-strip span,
+    .chip {
+      color: #dffaff;
+      padding: 8px 11px;
+      border-radius: 4px;
+      background: rgba(8, 18, 32, 0.74);
+      border: 1px solid rgba(56, 232, 255, 0.18);
+      font-size: 0.86rem;
+      box-shadow: inset 0 0 18px rgba(56, 232, 255, 0.035);
+      clip-path: polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px);
+    }
+
+    .ai-console {
+      position: relative;
+      border: 1px solid rgba(56, 232, 255, 0.28);
+      background:
+        linear-gradient(145deg, rgba(8, 18, 32, 0.93), rgba(10, 25, 45, 0.76)),
+        rgba(8, 18, 32, 0.78);
+      border-radius: 24px;
+      padding: 26px;
+      box-shadow: var(--shadow), 0 0 60px rgba(56, 232, 255, 0.10);
+      overflow: hidden;
+      transform-style: preserve-3d;
+      animation: fadeIn 1s 0.25s ease both;
+    }
+
+    .ai-console::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(120deg, transparent 0 18%, rgba(56,232,255,0.08) 20%, transparent 23% 100%);
+      transform: translateX(-100%);
+      animation: panelSweep 5s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+    .ai-console::after {
+      content: "";
+      position: absolute;
+      inset: 10px;
+      border: 1px solid rgba(56, 232, 255, 0.10);
+      border-radius: 18px;
+      pointer-events: none;
+    }
+
+    .console-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 18px;
+      margin-bottom: 22px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .reactor-core {
+      width: 104px;
+      height: 104px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(56, 232, 255, 0.55);
+      background:
+        radial-gradient(circle, #fff 0 8%, #aefbff 9% 16%, rgba(56,232,255,0.85) 17% 25%, transparent 26% 36%, rgba(56,232,255,0.16) 37% 46%, transparent 47%),
+        conic-gradient(from 0deg, rgba(56,232,255,0.85), rgba(247,201,72,0.7), rgba(56,232,255,0.85));
+      box-shadow: 0 0 45px rgba(56, 232, 255, 0.62), inset 0 0 28px rgba(255,255,255,0.25);
+      animation: reactorSpin 9s linear infinite;
+      font-size: 1.9rem;
+      font-weight: 950;
+      color: #021018;
+    }
+
+    .profile-photo-frame {
+      position: relative;
+      width: 150px;
+      height: 190px;
+      padding: 6px;
+      border: 1px solid rgba(56, 232, 255, 0.48);
+      background:
+        linear-gradient(135deg, rgba(56, 232, 255, 0.18), rgba(247, 201, 72, 0.13)),
+        rgba(8, 18, 32, 0.86);
+      box-shadow:
+        0 0 34px rgba(56, 232, 255, 0.22),
+        inset 0 0 22px rgba(56, 232, 255, 0.08);
+      overflow: hidden;
+      clip-path: polygon(16px 0, 100% 0, 100% calc(100% - 16px), calc(100% - 16px) 100%, 0 100%, 0 16px);
+    }
+
+    .profile-photo-frame::before {
+      content: "PROFILE // BRIAN LEE";
+      position: absolute;
+      left: 10px;
+      top: 10px;
+      z-index: 2;
+      padding: 3px 7px;
+      color: #021018;
+      background: linear-gradient(90deg, var(--cyan), #dffaff);
+      font-size: 0.58rem;
+      font-weight: 950;
+      letter-spacing: 1px;
+      box-shadow: 0 0 12px rgba(56, 232, 255, 0.35);
+    }
+
+    .profile-photo-frame::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      background:
+        linear-gradient(180deg, transparent 0%, rgba(2, 4, 10, 0.15) 55%, rgba(2, 4, 10, 0.55) 100%),
+        linear-gradient(115deg, transparent 0 35%, rgba(56,232,255,0.16) 48%, transparent 60% 100%);
+      transform: translateX(-120%);
+      animation: panelSweep 5s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+    .profile-photo {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 36%;
+      filter: brightness(0.88) contrast(1.08) saturate(0.96);
+      border-radius: 12px;
+    }
+
+    .system-status {
+      text-align: right;
+      color: #bbf7d0;
+      font-weight: 900;
+      font-size: 0.82rem;
+      padding: 8px 11px;
+      border: 1px solid rgba(52, 211, 153, 0.25);
+      background: rgba(52, 211, 153, 0.07);
+      border-radius: 999px;
+    }
+
+    .ai-console h2 {
+      position: relative;
+      z-index: 1;
+      font-size: 2rem;
+      letter-spacing: -1px;
+      margin-bottom: 8px;
+    }
+
+    .ai-console p {
+      position: relative;
+      z-index: 1;
+      color: var(--muted);
+      margin-bottom: 22px;
+    }
+
+    .system-readout {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+
+    .readout {
+      padding: 15px;
+      border: 1px solid rgba(56, 232, 255, 0.14);
+      background: rgba(2, 8, 18, 0.52);
+      border-radius: 16px;
+    }
+
+    .readout strong {
+      display: block;
+      font-size: 1.38rem;
+      color: white;
+      line-height: 1.1;
+      text-shadow: 0 0 14px rgba(56, 232, 255, 0.28);
+    }
+
+    .readout span {
+      color: var(--muted);
+      font-size: 0.78rem;
+    }
+
+    .xp-panel {
+      position: relative;
+      z-index: 1;
+      padding: 17px;
+      border-radius: 16px;
+      background: rgba(2, 8, 18, 0.52);
+      border: 1px solid rgba(247, 201, 72, 0.18);
+      margin-bottom: 18px;
+    }
+
+    .xp-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 10px;
+      color: #fff7cc;
+      font-weight: 900;
+      font-size: 0.9rem;
+    }
+
+    .xp-bar {
+      height: 12px;
+      border-radius: 999px;
+      overflow: hidden;
+      background: rgba(0, 0, 0, 0.42);
+      border: 1px solid rgba(148, 163, 184, 0.12);
+    }
+
+    .xp-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--gold), var(--orange), var(--cyan));
+      box-shadow: 0 0 24px rgba(247, 201, 72, 0.35);
+      transition: width 0.65s ease;
+    }
+
+    .quest-list {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      gap: 12px;
+    }
+
+    .quest-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      padding: 13px;
+      border-radius: 14px;
+      background: rgba(2, 8, 18, 0.42);
+      border: 1px solid rgba(56, 232, 255, 0.12);
+    }
+
+    .quest-item strong {
+      display: block;
+      font-size: 0.94rem;
+      color: white;
+    }
+
+    .quest-item span {
+      color: var(--muted);
+      font-size: 0.8rem;
+    }
+
+    .quest-status {
+      color: #bbf7d0;
+      font-size: 0.78rem;
+      font-weight: 900;
+      white-space: nowrap;
+    }
+
+    .section-heading {
+      text-align: center;
+      max-width: 810px;
+      margin: 0 auto 48px;
+    }
+
+    .kicker {
+      color: var(--cyan);
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 2.4px;
+      font-weight: 950;
+      margin-bottom: 10px;
+      text-shadow: 0 0 18px rgba(56, 232, 255, 0.55);
+    }
+
+    .section-heading h2 {
+      font-size: clamp(2rem, 4vw, 3.05rem);
+      line-height: 1.1;
+      letter-spacing: -1.5px;
+      margin-bottom: 14px;
+    }
+
+    .section-heading p {
+      color: var(--muted);
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1.08fr 0.92fr;
+      gap: 24px;
+    }
+
+    .hud-panel,
+    .card {
+      position: relative;
+      background: var(--panel);
+      border: 1px solid var(--line-soft);
+      border-radius: 22px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(18px);
+      overflow: hidden;
+      clip-path: polygon(18px 0, 100% 0, 100% calc(100% - 18px), calc(100% - 18px) 100%, 0 100%, 0 18px);
+    }
+
+    .hud-panel {
+      padding: 32px;
+    }
+
+    .hud-panel::before,
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-top: 1px solid rgba(56, 232, 255, 0.28);
+      background: linear-gradient(135deg, rgba(56,232,255,0.08), transparent 36%, rgba(247,201,72,0.04));
+      pointer-events: none;
+    }
+
+    .hud-panel h3,
+    .card h3 {
+      font-size: 1.25rem;
+      margin-bottom: 12px;
+      color: white;
+    }
+
+    .hud-panel p,
+    .card p,
+    .card li {
+      color: #cbdced;
+    }
+
+    .company-logo {
+      position: relative;
+      z-index: 1;
+      margin-bottom: 18px;
+      padding: 18px;
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(56, 232, 255, 0.14);
+      box-shadow: inset 0 0 24px rgba(56, 232, 255, 0.04);
+    }
+
+    .ritedose-logo-img {
+      display: block;
+      width: 100%;
+      max-width: 460px;
+      height: auto;
+      object-fit: contain;
+      filter: drop-shadow(0 0 12px rgba(255, 196, 0, 0.16));
+    }
+
+    .video-embed-card {
+      position: relative;
+      z-index: 1;
+      margin-top: 16px;
+      padding: 14px;
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(56, 232, 255, 0.16);
+      box-shadow: inset 0 0 24px rgba(56, 232, 255, 0.04);
+    }
+
+    .video-embed-card h4 {
+      margin-bottom: 12px;
+      color: #dffaff;
+      font-size: 0.95rem;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+
+    .video-embed-wrap {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      overflow: hidden;
+      border-radius: 14px;
+      border: 1px solid rgba(56, 232, 255, 0.15);
+      background: #02040a;
+    }
+
+    .video-embed-wrap iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+      display: block;
+    }
+
+    .linkedin-embed-card {
+      position: relative;
+      z-index: 1;
+      margin-top: 20px;
+      padding: 16px;
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(56, 232, 255, 0.16);
+      box-shadow: inset 0 0 24px rgba(56, 232, 255, 0.04);
+    }
+
+    .linkedin-embed-card h4 {
+      margin-bottom: 12px;
+      color: #dffaff;
+      font-size: 0.95rem;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+
+    .linkedin-embed-wrap {
+      position: relative;
+      width: 100%;
+      max-width: 504px;
+      height: 520px;
+      overflow: hidden;
+      border-radius: 14px;
+      border: 1px solid rgba(56, 232, 255, 0.15);
+      background: #ffffff;
+    }
+
+    .linkedin-embed-wrap iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+      display: block;
+    }
+
+    .linkedin-direct-link {
+      display: inline-block;
+      margin-top: 12px;
+      color: var(--cyan);
+      font-weight: 900;
+      font-size: 0.9rem;
+    }
+
+    .quick-facts {
+      display: grid;
+      gap: 14px;
+    }
+
+    .fact {
+      padding: 18px;
+      border-radius: 15px;
+      background: rgba(2, 8, 18, 0.42);
+      border: 1px solid rgba(56, 232, 255, 0.13);
+    }
+
+    .fact strong {
+      display: block;
+      color: white;
+      margin-bottom: 4px;
+    }
+
+    .fact span {
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .mission-grid,
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+
+    .card {
+      padding: 28px;
+      transition: 0.28s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-10px);
+      border-color: rgba(56, 232, 255, 0.42);
+      box-shadow: var(--shadow), 0 0 42px rgba(56, 232, 255, 0.10);
+      background: rgba(10, 25, 45, 0.86);
+    }
+
+    .icon {
+      width: 54px;
+      height: 54px;
+      border-radius: 15px;
+      display: grid;
+      place-items: center;
+      margin-bottom: 18px;
+      color: var(--cyan);
+      background: rgba(56, 232, 255, 0.08);
+      border: 1px solid rgba(56, 232, 255, 0.25);
+      box-shadow: inset 0 0 20px rgba(56, 232, 255, 0.06), 0 0 18px rgba(56, 232, 255, 0.08);
+    }
+
+    .icon svg {
+      width: 28px;
+      height: 28px;
+      stroke: currentColor;
+      stroke-width: 1.8;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      fill: none;
+    }
+
+    .mission-card.complete {
+      border-color: rgba(52, 211, 153, 0.42);
+    }
+
+    .mission-btn,
+    .unlock-btn,
+    .skill-token {
+      border: 1px solid rgba(56, 232, 255, 0.25);
+      background: rgba(56, 232, 255, 0.08);
+      color: #dffaff;
+      border-radius: 4px;
+      padding: 9px 13px;
+      font-size: 0.88rem;
+      font-weight: 900;
+      cursor: pointer;
+      transition: 0.25s ease;
+      clip-path: polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px);
+    }
+
+    .mission-btn:hover,
+    .unlock-btn:hover,
+    .skill-token:hover {
+      color: white;
+      transform: translateY(-3px);
+      background: rgba(56, 232, 255, 0.16);
+      box-shadow: 0 0 18px rgba(56, 232, 255, 0.16);
+    }
+
+    .mission-card.complete .mission-btn,
+    .skill-token.unlocked {
+      color: #fff7cc;
+      background: rgba(247, 201, 72, 0.12);
+      border-color: rgba(247, 201, 72, 0.3);
+    }
+
+    .mission-card p {
+      margin-bottom: 18px;
+    }
+
+    .skills-board {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+      margin-bottom: 26px;
+    }
+
+    .skill-box {
+      min-height: 230px;
+    }
+
+    .skill-box ul {
+      list-style: none;
+      margin-top: 12px;
+    }
+
+    .skill-box li {
+      margin-bottom: 9px;
+      color: #cbdced;
+    }
+
+    .skill-box li::before {
+      content: "// ";
+      color: var(--cyan);
+      font-weight: 900;
+    }
+
+    .skill-token-board {
+      padding: 24px;
+      border-radius: 22px;
+      background: rgba(8, 18, 32, 0.74);
+      border: 1px solid rgba(56, 232, 255, 0.18);
+      box-shadow: var(--shadow);
+      clip-path: polygon(18px 0, 100% 0, 100% calc(100% - 18px), calc(100% - 18px) 100%, 0 100%, 0 18px);
+    }
+
+    .skill-token-board h3 {
+      margin-bottom: 8px;
+    }
+
+    .skill-token-board p {
+      color: var(--muted);
+      margin-bottom: 16px;
+    }
+
+    .token-wrap {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .project-card {
+      min-height: 470px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .project-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 18px;
+    }
+
+    .project-number {
+      font-size: 2.7rem;
+      line-height: 1;
+      color: rgba(56, 232, 255, 0.22);
+      font-weight: 950;
+      text-shadow: 0 0 18px rgba(56, 232, 255, 0.24);
+    }
+
+    .project-badge {
+      padding: 7px 10px;
+      border-radius: 999px;
+      color: #dffaff;
+      background: rgba(56, 232, 255, 0.08);
+      border: 1px solid rgba(56, 232, 255, 0.22);
+      font-size: 0.78rem;
+      font-weight: 900;
+    }
+
+    .project-visual {
+      height: 150px;
+      border-radius: 16px;
+      background:
+        linear-gradient(135deg, rgba(56, 232, 255, 0.12), rgba(247, 201, 72, 0.05)),
+        rgba(2, 8, 18, 0.45);
+      border: 1px solid rgba(56, 232, 255, 0.14);
+      margin: 18px 0;
+      padding: 16px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .project-visual::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(56,232,255,0.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(56,232,255,0.05) 1px, transparent 1px);
+      background-size: 100% 24px, 34px 100%;
+      pointer-events: none;
+    }
+
+    .project-visual::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(115deg, transparent 0 35%, rgba(56,232,255,0.14) 48%, transparent 60% 100%);
+      transform: translateX(-120%);
+      animation: panelSweep 5s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+    .preview-top {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      gap: 6px;
+      margin-bottom: 12px;
+    }
+
+    .preview-top span {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: rgba(56, 232, 255, 0.75);
+      box-shadow: 0 0 12px rgba(56, 232, 255, 0.45);
+    }
+
+    .dashboard-layout {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: 46px 1fr;
+      gap: 12px;
+      height: 104px;
+    }
+
+    .dashboard-sidebar {
+      border-radius: 12px;
+      background: rgba(56, 232, 255, 0.08);
+      border: 1px solid rgba(56, 232, 255, 0.14);
+      position: relative;
+    }
+
+    .dashboard-sidebar::before,
+    .dashboard-sidebar::after {
+      content: "";
+      position: absolute;
+      left: 10px;
+      right: 10px;
+      height: 8px;
+      border-radius: 999px;
+      background: rgba(56, 232, 255, 0.35);
+      box-shadow: 0 18px 0 rgba(56, 232, 255, 0.18), 0 36px 0 rgba(247, 201, 72, 0.22);
+    }
+
+    .dashboard-sidebar::before { top: 14px; }
+    .dashboard-sidebar::after { display: none; }
+
+    .dashboard-main {
+      display: grid;
+      grid-template-rows: 26px 1fr;
+      gap: 10px;
+    }
+
+    .mini-kpis {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+    }
+
+    .mini-kpis span {
+      border-radius: 10px;
+      background: rgba(56, 232, 255, 0.09);
+      border: 1px solid rgba(56, 232, 255, 0.14);
+    }
+
+    .mini-chart-svg {
+      width: 100%;
+      height: 68px;
+      border-radius: 12px;
+      background: rgba(2, 8, 18, 0.45);
+      border: 1px solid rgba(56, 232, 255, 0.13);
+    }
+
+    .globe-preview {
+      display: grid;
+      place-items: center;
+    }
+
+    .globe-wrap {
+      position: relative;
+      z-index: 1;
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      border: 1px solid rgba(56, 232, 255, 0.45);
+      background:
+        radial-gradient(circle at 35% 30%, rgba(255,255,255,0.2), transparent 18%),
+        radial-gradient(circle, rgba(56,232,255,0.16), transparent 62%);
+      box-shadow: 0 0 34px rgba(56, 232, 255, 0.18), inset 0 0 24px rgba(56, 232, 255, 0.12);
+      animation: float 5s ease-in-out infinite;
+    }
+
+    .globe-wrap::before,
+    .globe-wrap::after {
+      content: "";
+      position: absolute;
+      inset: 15px;
+      border: 1px solid rgba(56, 232, 255, 0.28);
+      border-radius: 50%;
+    }
+
+    .globe-wrap::after {
+      inset: 0;
+      border-left-color: transparent;
+      border-right-color: transparent;
+      transform: rotate(65deg);
+    }
+
+    .orbit {
+      position: absolute;
+      inset: -13px;
+      border-radius: 50%;
+      border: 1px solid rgba(247, 201, 72, 0.25);
+      border-left-color: transparent;
+      border-right-color: transparent;
+      animation: reactorSpin 8s linear infinite;
+    }
+
+    .node {
+      position: absolute;
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--gold);
+      box-shadow: 0 0 14px rgba(247, 201, 72, 0.7);
+    }
+
+    .node.one { top: 23px; left: 22px; }
+    .node.two { top: 38px; right: 20px; background: var(--cyan); }
+    .node.three { bottom: 24px; left: 48px; }
+    .node.four { bottom: 34px; right: 34px; background: var(--cyan); }
+
+    .tcg-preview {
+      display: grid;
+      place-items: center;
+      padding: 0;
+    }
+
+    .project-screenshot {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      border-radius: 14px;
+      filter: brightness(0.88) contrast(1.08) saturate(1.06);
+    }
+
+    .screenshot-gallery {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin-top: 12px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .screenshot-thumb {
+      height: 54px;
+      border-radius: 10px;
+      object-fit: cover;
+      border: 1px solid rgba(56, 232, 255, 0.18);
+      filter: brightness(0.78) contrast(1.06);
+      cursor: pointer;
+      transition: 0.25s ease;
+    }
+
+    .screenshot-thumb:hover {
+      transform: translateY(-3px);
+      filter: brightness(1) contrast(1.08);
+      border-color: rgba(247, 201, 72, 0.45);
+      box-shadow: 0 0 16px rgba(247, 201, 72, 0.12);
+    }
+
+    .tech-stack {
+      color: #fff7cc;
+      font-size: 0.88rem;
+      font-weight: 900;
+      margin-bottom: 13px;
+    }
+
+    .project-details {
+      display: none;
+      margin-top: 16px;
+      padding: 15px;
+      border-radius: 15px;
+      background: rgba(2, 8, 18, 0.45);
+      border: 1px solid rgba(56, 232, 255, 0.13);
+    }
+
+    .project-details.open {
+      display: block;
+      animation: fadeUp 0.35s ease both;
+    }
+
+    .project-details ul {
+      list-style: none;
+    }
+
+    .project-details li {
+      color: #cbdced;
+      margin-bottom: 7px;
+      font-size: 0.92rem;
+    }
+
+    .project-details li::before {
+      content: "✓ ";
+      color: var(--green);
+      font-weight: 900;
+    }
+
+    .project-links {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: auto;
+      padding-top: 20px;
+    }
+
+    .project-links a {
+      padding: 9px 13px;
+      border-radius: 4px;
+      color: #dffaff;
+      background: rgba(56, 232, 255, 0.08);
+      border: 1px solid rgba(56, 232, 255, 0.22);
+      font-size: 0.88rem;
+      font-weight: 900;
+      transition: 0.25s ease;
+      clip-path: polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px);
+    }
+
+    .project-links a:hover {
+      transform: translateY(-3px);
+      background: rgba(56, 232, 255, 0.16);
+      box-shadow: 0 0 18px rgba(56, 232, 255, 0.16);
+    }
+
+    .achievement-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-top: 24px;
+    }
+
+    .achievement {
+      padding: 18px;
+      border-radius: 18px;
+      background: rgba(8, 18, 32, 0.62);
+      border: 1px solid rgba(56, 232, 255, 0.14);
+      color: var(--muted);
+      transition: 0.25s ease;
+    }
+
+    .achievement.unlocked {
+      border-color: rgba(247, 201, 72, 0.36);
+      background: rgba(247, 201, 72, 0.08);
+      color: #fff7cc;
+      transform: translateY(-4px);
+      box-shadow: 0 0 22px rgba(247, 201, 72, 0.08);
+    }
+
+    .achievement strong {
+      display: block;
+      color: white;
+      margin-bottom: 4px;
+    }
+
+    .resume-band {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      padding: 42px;
+      border-radius: 22px;
+      border: 1px solid rgba(56, 232, 255, 0.2);
+      background:
+        linear-gradient(135deg, rgba(56, 232, 255, 0.14), rgba(247, 201, 72, 0.08), rgba(59, 130, 246, 0.12)),
+        rgba(8, 18, 32, 0.78);
+      box-shadow: var(--shadow);
+      clip-path: polygon(22px 0, 100% 0, 100% calc(100% - 22px), calc(100% - 22px) 100%, 0 100%, 0 22px);
+    }
+
+    .resume-band h2 {
+      font-size: clamp(1.8rem, 4vw, 2.7rem);
+      letter-spacing: -1px;
+      margin-bottom: 10px;
+    }
+
+    .resume-band p {
+      color: #cbdced;
+      max-width: 680px;
+    }
+
+    .contact-card {
+      max-width: 920px;
+      margin: 0 auto;
+      text-align: center;
+      padding: 46px;
+      border-radius: 22px;
+      border: 1px solid rgba(56, 232, 255, 0.2);
+      background: var(--panel);
+      box-shadow: var(--shadow);
+      clip-path: polygon(22px 0, 100% 0, 100% calc(100% - 22px), calc(100% - 22px) 100%, 0 100%, 0 22px);
+    }
+
+    .contact-card h2 {
+      font-size: clamp(2rem, 4vw, 3.1rem);
+      letter-spacing: -1.5px;
+      margin-bottom: 14px;
+    }
+
+    .contact-card p {
+      color: #cbdced;
+      max-width: 700px;
+      margin: 0 auto 26px;
+    }
+
+    .contact-links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+    }
+
+    .contact-links a {
+      padding: 11px 15px;
+      border-radius: 4px;
+      color: #dffaff;
+      background: rgba(56, 232, 255, 0.08);
+      border: 1px solid rgba(56, 232, 255, 0.22);
+      font-weight: 900;
+      transition: 0.25s ease;
+      clip-path: polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px);
+    }
+
+    .contact-links a:hover {
+      transform: translateY(-3px);
+      background: rgba(56, 232, 255, 0.16);
+      box-shadow: 0 0 18px rgba(56, 232, 255, 0.16);
+    }
+
+    footer {
+      padding: 28px 0;
+      text-align: center;
+      color: var(--muted);
+      border-top: 1px solid rgba(56, 232, 255, 0.12);
+    }
+
+    .toast {
+      position: fixed;
+      right: 22px;
+      bottom: 22px;
+      z-index: 2000;
+      width: min(370px, calc(100% - 44px));
+      padding: 16px 18px;
+      border-radius: 18px;
+      background: rgba(8, 18, 32, 0.96);
+      border: 1px solid rgba(247, 201, 72, 0.35);
+      box-shadow: var(--shadow), 0 0 28px rgba(247, 201, 72, 0.08);
+      transform: translateY(120%);
+      opacity: 0;
+      transition: 0.35s ease;
+    }
+
+    .toast.show {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    .toast strong {
+      display: block;
+      color: #fff7cc;
+      margin-bottom: 4px;
+    }
+
+    .toast span {
+      color: #dffaff;
+      font-size: 0.92rem;
+    }
+
+    .reveal {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    body.js-enabled .reveal {
+      opacity: 0;
+      transform: translateY(26px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    body.js-enabled .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @keyframes scan {
+      0% { top: -4px; }
+      100% { top: 100vh; }
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes gradientMove {
+      0% { background-position: 0% center; }
+      100% { background-position: 260% center; }
+    }
+
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(52, 211, 153, 0.65); }
+      70% { box-shadow: 0 0 0 10px rgba(52, 211, 153, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(52, 211, 153, 0); }
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-16px); }
+    }
+
+    @keyframes reactorSpin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    @keyframes slowRotate {
+      from { transform: translateY(-50%) rotate(0deg); }
+      to { transform: translateY(-50%) rotate(360deg); }
+    }
+
+    @keyframes panelSweep {
+      0%, 60% { transform: translateX(-115%); }
+      100% { transform: translateX(115%); }
+    }
+
+    @keyframes growBar {
+      from { transform: scaleY(0.12); transform-origin: bottom; opacity: 0.3; }
+      to { transform: scaleY(1); transform-origin: bottom; opacity: 1; }
+    }
+
+    @media (max-width: 1080px) {
+      .hero-grid,
+      .about-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .mission-grid,
+      .project-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .skills-board,
+      .achievement-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .resume-band {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+
+    @media (max-width: 850px) {
+      .nav-wrap {
+        height: auto;
+        padding: 18px 0;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      nav {
+        width: 100%;
+        overflow-x: auto;
+        padding-bottom: 6px;
+      }
+
+      .xp-mini {
+        width: 100%;
+      }
+
+      .hero h1 {
+        letter-spacing: -2px;
+      }
+
+      .hero-actions,
+      .contact-links {
+        flex-direction: column;
+      }
+
+      .btn,
+      .contact-links a {
+        width: 100%;
+      }
+
+      .system-readout,
+      .skills-board,
+      .achievement-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .console-top,
+      .quest-item {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .system-status,
+      .quest-status {
+        white-space: normal;
+        text-align: left;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        animation: none !important;
+        transition: none !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="scan-line"></div>
+
+  <header>
+    <div class="container nav-wrap">
+      <a href="#home" class="brand">
+        <div class="reactor-logo">BL</div>
+        <div class="logo-text">Brian<span>Lee</span></div>
+      </a>
+
+      <nav>
+        <a href="#about">Profile</a>
+        <a href="#recruiter">Why Me</a>
+        <a href="#experience">Experience</a>
+        <a href="#courses">Courses</a>
+        <a href="#tech">Systems</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact" class="nav-cta">Connect</a>
+      </nav>
+
+      <div class="xp-mini">
+        <span id="navXpText">Level 1 · 0 XP</span>
+        <div class="xp-mini-bar"><div class="xp-mini-fill" id="navXpFill"></div></div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="orb one"></div>
+      <div class="orb two"></div>
+
+      <div class="container hero-grid">
+        <div>
+          <div class="system-tag"><span class="pulse"></span> SYSTEM ONLINE · TECH / CODE / DATA</div>
+          <h1>Initializing <span class="gradient-text">Brian Lee</span> command center.</h1>
+          <div class="type-line" id="typeLine">Loading portfolio systems...</div>
+          <p>
+            Computer Science graduate from the University of South Carolina focused on software development, IT systems, data analysis, dashboards, and business insights. I am currently completing the Google Data Analytics certification to continue strengthening my analytics foundation, including spreadsheet and Excel-based analysis skills. This portfolio is designed like a high-tech interface: inspect systems, unlock skills, and explore projects that combine code, data, and problem-solving.
+          </p>
+
+          <div class="hero-actions">
+            <a href="#projects" class="btn btn-primary award-xp" data-xp="15" data-achievement="Command Center Entered">Enter Project Lab →</a>
+            <a href="Resume Brian Lee Updated 4(1).pdf" class="btn btn-secondary award-xp" data-xp="20" data-achievement="Resume Retrieved" target="_blank">Download Resume</a>
+            <a href="https://github.com/brianthanhlee" class="btn btn-secondary award-xp" data-xp="15" data-achievement="Source Code Accessed" target="_blank">GitHub</a>
+          </div>
+
+          <div class="tech-strip">
+            <span>Power BI</span>
+            <span>SQL</span>
+            <span>Excel</span>
+            <span>R Shiny</span>
+            <span>Python</span>
+            <span>React</span>
+            <span>Go</span>
+            <span>PostgreSQL</span>
+            <span>Google Data Analytics</span>
+          </div>
+        </div>
+
+        <div class="ai-console" id="aiConsole">
+          <div class="console-top">
+            <div class="profile-photo-frame">
+              <img src="profile.jpeg" alt="Brian Lee profile photo" class="profile-photo" />
+            </div>
+            <div class="system-status">ONLINE · AVAILABLE FOR OPPORTUNITIES</div>
+          </div>
+
+          <h2>AI Portfolio Interface</h2>
+          <p>Mission dashboard tracking coding, data analysis, development, and communication systems.</p>
+
+          <div class="system-readout">
+            <div class="readout">
+              <strong>4+</strong>
+              <span>Project modules</span>
+            </div>
+            <div class="readout">
+              <strong>15+</strong>
+              <span>Core tools</span>
+            </div>
+            <div class="readout">
+              <strong>IT</strong>
+              <span>Internship experience</span>
+            </div>
+          </div>
+
+          <div class="xp-panel">
+            <div class="xp-row">
+              <span id="xpText">0 / 100 XP</span>
+              <span id="xpTitle">Next: Data Builder</span>
+            </div>
+            <div class="xp-bar"><div class="xp-fill" id="xpFill"></div></div>
+          </div>
+
+          <div class="quest-list">
+            <div class="quest-item">
+              <div>
+                <strong>System 01: Data Analysis</strong>
+                <span>Dashboards, KPIs, SQL, and insights</span>
+              </div>
+              <div class="quest-status" id="questData">SCANNING</div>
+            </div>
+            <div class="quest-item">
+              <div>
+                <strong>System 02: Software Development</strong>
+                <span>Web apps, backend logic, and databases</span>
+              </div>
+              <div class="quest-status" id="questCode">SCANNING</div>
+            </div>
+            <div class="quest-item">
+              <div>
+                <strong>System 03: Communication</strong>
+                <span>Clear reporting and visual storytelling</span>
+              </div>
+              <div class="quest-status" id="questStory">SCANNING</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="about">
+      <div class="container">
+        <div class="section-heading reveal">
+          <div class="kicker">Profile Scan</div>
+          <h2>Developer mindset. Data-driven focus. Creative execution.</h2>
+          <p>A portfolio built to show technology, coding, dashboards, and analytical problem-solving.</p>
+        </div>
+
+        <div class="about-grid">
+          <div class="hud-panel reveal">
+            <h3>Identity Module</h3>
+            <p>
+              I am a Computer Science graduate from the University of South Carolina with experience in IT support, software development, data analytics, business intelligence, and data visualization. I enjoy working on projects from start to finish: planning the idea, writing code, organizing data, building dashboards, and explaining what the results mean.
+            </p>
+            <br />
+            <p>
+              My goal is to grow into a well-rounded technical professional who can support teams through coding, data analysis, dashboard development, and clear technical communication.
+            </p>
+            <br />
+            <p>
+              I am also a first-generation college student from Kingstree, South Carolina. Coming from a small town where limited opportunity can feel normal, I learned how important direction, discipline, and ownership are. My parents came here for a better life, and as I have grown older, I have realized that I am responsible for building the future I want through consistent effort, learning, and action.
+            </p>
+          </div>
+
+          <div class="hud-panel reveal">
+            <h3>Operator Profile</h3>
+            <div class="quick-facts">
+              <div class="fact">
+                <strong>Education</strong>
+                <span>Bachelor of Science in Computer Science, University of South Carolina</span>
+              </div>
+              <div class="fact">
+                <strong>Core Systems</strong>
+                <span>SQL, Python, Power BI, Excel, R Shiny, React, Go, PostgreSQL</span>
+              </div>
+              <div class="fact">
+                <strong>Experience</strong>
+                <span>IT internship, dashboard projects, full-stack development, and team-based software projects</span>
+              </div>
+              <div class="fact">
+                <strong>Personal Drive</strong>
+                <span>First-generation college student from Kingstree, SC, motivated by growth, ownership, and creating a better future</span>
+              </div>
+              <div class="fact">
+                <strong>Certification In Progress</strong>
+                <span>Currently completing the Google Data Analytics certification, including spreadsheet and Excel-based analysis</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="recruiter">
+      <div class="container">
+        <div class="section-heading reveal">
+          <div class="kicker">Recruiter Briefing</div>
+          <h2>Why I am building this path.</h2>
+          <p>My background shaped the way I approach technology, learning, and opportunity.</p>
+        </div>
+
+        <div class="about-grid">
+          <div class="hud-panel reveal">
+            <h3>Origin Mission</h3>
+            <p>
+              I am a first-generation college student from Kingstree, South Carolina. Growing up in a small town where poverty and limited opportunity can feel normal taught me that progress is not automatic — it has to be built with discipline, direction, and persistence.
+            </p>
+            <br />
+            <p>
+              My parents came here for a better life, and I am working to carry that forward by building a career in technology, data, and software development. Early on, I did not always understand the corporate path or what direction to take, but over time I learned that I am in control of my growth and responsible for the results I create.
+            </p>
+          </div>
+
+          <div class="hud-panel reveal">
+            <h3>What That Means Professionally</h3>
+            <div class="quick-facts">
+              <div class="fact">
+                <strong>Ownership</strong>
+                <span>I take responsibility for learning, improving, and finding solutions instead of waiting for direction.</span>
+              </div>
+              <div class="fact">
+                <strong>Resilience</strong>
+                <span>I understand how to keep going through uncertainty, setbacks, and unfamiliar environments.</span>
+              </div>
+              <div class="fact">
+                <strong>Purpose</strong>
+                <span>I want to use technology and data to build useful solutions, grow professionally, and create more opportunity.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="experience">
+      <div class="container">
+        <div class="section-heading reveal">
+          <div class="kicker">Experience Log</div>
+          <h2>Real-world IT experience plus hackathon building.</h2>
+          <p>My internship and hackathon experience helped me work with IT systems, web development, teamwork, documentation, troubleshooting, and problem-solving.</p>
+        </div>
+
+        <div class="about-grid">
+          <div class="hud-panel reveal">
+            <div class="company-logo">
+              <img src="Ritedose_logo_large.png" alt="Ritedose logo" class="ritedose-logo-img" />
+            </div>
+            <h3>The Ritedose Corporation · IT Intern</h3>
+            <p>
+              Supported IT operations by configuring Windows 11 workstations, deploying VoIP phones, reimaging laptops, analyzing network connectivity, and documenting troubleshooting workflows.
+            </p>
+            <br />
+            <p>
+              This experience strengthened my ability to solve technical problems, communicate clearly, and support systems that employees rely on every day.
+            </p>
+          </div>
+
+          <div class="hud-panel reveal">
+            <h3>Experience Highlights</h3>
+            <div class="quick-facts">
+              <div class="fact">
+                <strong>Systems Support</strong>
+                <span>Configured Windows 11 workstations and VoIP phones for new hires</span>
+              </div>
+              <div class="fact">
+                <strong>Networking</strong>
+                <span>Used PuTTY and command-line tools to analyze network configurations and connectivity</span>
+              </div>
+              <div class="fact">
+                <strong>Documentation</strong>
+                <span>Created troubleshooting documentation and a Cisco 2960 switch asset map</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="hud-panel reveal">
+            <h3>SolHack Hackathon · SHPE Representative</h3>
+            <p>
+              Attended SolHack at UNC Chapel Hill in March 2025 as a SHPE representative and built a hybrid task management and project planning web app. This LinkedIn post documents the event and adds credibility to the hackathon experience.
+            </p>
+
+            <div class="linkedin-embed-card">
+              <h4>LinkedIn Event Post</h4>
+              <div class="linkedin-embed-wrap">
+                <iframe src="https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7312278817404792832?collapsed=1" allowfullscreen="" title="Embedded LinkedIn post"></iframe>
+              </div>
+              <a class="linkedin-direct-link" href="https://www.linkedin.com/posts/brian-lee-74669b223_had-an-incredible-time-attending-the-first-activity-7312278918495907840--Yy9?utm_source=share&utm_medium=member_desktop&rcm=ACoAADgqH2YBfp554Jv8JXkgHvZmFHZa8h4YaT0" target="_blank">Open LinkedIn Post →</a>
+            </div>
+            <br />
+            <div class="quick-facts">
+              <div class="fact">
+                <strong>Tech Stack</strong>
+                <span>HTML, CSS, JavaScript</span>
+              </div>
+              <div class="fact">
+                <strong>Features Built</strong>
+                <span>Interactive to-do lists, dynamic calendar scheduling, and responsive UI</span>
+              </div>
+              <div class="fact">
+                <strong>Gamified Design</strong>
+                <span>Reward-based task completion, color-coded task organization, and dynamic calendar interactions</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="courses">
+      <div class="container">
+        <div class="section-heading reveal">
+          <div class="kicker">Coursework & Certification Database</div>
+          <h2>Relevant courses behind my technical foundation.</h2>
+          <p>A focused list of coursework and certification progress that supports my interest in software development, data analytics, AI, systems, databases, and visualization.</p>
+        </div>
+
+        <div class="skills-board">
+          <div class="card skill-box reveal">
+            <div class="icon">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M8 9l-4 3 4 3"></path>
+                <path d="M16 9l4 3-4 3"></path>
+                <path d="M14 5l-4 14"></path>
+              </svg>
+            </div>
+            <h3>Programming & Software</h3>
+            <ul>
+              <li>Algorithmic Design I & II</li>
+              <li>Advanced Programming Techniques</li>
+              <li>Software Engineering</li>
+              <li>Programming Language Structures</li>
+              <li>Data Structures & Algorithms</li>
+            </ul>
+          </div>
+
+          <div class="card skill-box reveal">
+            <div class="icon">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M4 19V5"></path>
+                <path d="M4 19h16"></path>
+                <path d="M7 15l4-4 3 3 5-7"></path>
+                <path d="M16 7h3v3"></path>
+              </svg>
+            </div>
+            <h3>Data, AI & Visualization</h3>
+            <ul>
+              <li>Database System Design</li>
+              <li>Visualization Tools</li>
+              <li>Artificial Intelligence</li>
+              <li>Artificial Intelligence for All</li>
+              <li>Statistics for Engineers</li>
+            </ul>
+          </div>
+
+          <div class="card skill-box reveal">
+            <div class="icon">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <rect x="6" y="6" width="12" height="12" rx="2"></rect>
+                <path d="M9 2v4"></path>
+                <path d="M15 2v4"></path>
+                <path d="M9 18v4"></path>
+                <path d="M15 18v4"></path>
+                <path d="M2 9h4"></path>
+                <path d="M2 15h4"></path>
+                <path d="M18 9h4"></path>
+                <path d="M18 15h4"></path>
+              </svg>
+            </div>
+            <h3>Systems & Computing</h3>
+            <ul>
+              <li>Operating Systems</li>
+              <li>Computer Networks</li>
+              <li>UNIX/Linux Fundamentals</li>
+              <li>Computer Architecture</li>
+              <li>Digital Logic Design</li>
+            </ul>
+          </div>
+
+          <div class="card skill-box reveal">
+            <div class="icon">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M4 6h16v12H4z"></path>
+                <path d="M4 10h16"></path>
+                <path d="M4 14h16"></path>
+                <path d="M8 6v4"></path>
+                <path d="M16 6v4"></path>
+                <path d="M12 10v4"></path>
+              </svg>
+            </div>
+            <h3>Math & Professional</h3>
+            <ul>
+              <li>Applied Linear Algebra</li>
+              <li>Vector Calculus</li>
+              <li>Discrete Structures</li>
+              <li>Professional Issues in CS & Engineering</li>
+              <li>Capstone Computing Project I & II</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="hud-panel reveal" style="margin-top: 24px;">
+          <h3>Certification In Progress</h3>
+          <p>
+            I am currently completing the Google Data Analytics certification to strengthen my understanding of data cleaning, analysis, spreadsheets/Excel, SQL, visualization, and data-driven decision-making.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="tech">
+      <div class="container">
+        <div class="section-heading reveal">
+          <div class="kicker">System Modules</div>
+          <h2>Activate the core systems.</h2>
+          <p>Click each system to mark it online and see how my portfolio connects coding, development, and data analysis.</p>
+        </div>
+
+        <div class="mission-grid">
+          <div class="card mission-card reveal" data-mission="data">
+            <div class="icon">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M4 19V5"></path>
+                <path d="M4 19h16"></path>
+                <path d="M8 16v-5"></path>
+                <path d="M12 16V8"></path>
+                <path d="M16 16v-7"></path>
+                <path d="M20 16v-3"></path>
+              </svg>
+            </div>
+            <h3>Data Analysis System</h3>
+            <p>I use Excel, SQL, Power BI, Python, pandas, R, R Shiny, ggplot2, and Plotly to clean data, validate KPIs, build dashboards, and explain insights clearly.</p>
+            <button class="mission-btn" data-xp="25" data-achievement="Data System Online">Activate System</button>
+          </div>
+
+          <div class="card mission-card reveal" data-mission="code">
+            <div class="icon">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M8 9l-4 3 4 3"></path>
+                <path d="M16 9l4 3-4 3"></path>
+                <path d="M14 5l-4 14"></path>
+              </svg>
+            </div>
+            <h3>Development System</h3>
+            <p>I enjoy building websites, applications, and technical projects using HTML, CSS, JavaScript, React, Go, Java, Python, REST APIs, PostgreSQL, and Docker.</p>
+            <button class="mission-btn" data-xp="25" data-achievement="Code System Online">Activate System</button>
+          </div>
+
+          <div class="card mission-card reveal" data-mission="story">
+            <div class="icon">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <rect x="6" y="6" width="12" height="12" rx="2"></rect>
+                <path d="M9 2v4"></path>
+                <path d="M15 2v4"></path>
+                <path d="M9 18v4"></path>
+                <path d="M15 18v4"></path>
+                <path d="M2 9h4"></path>
+                <path d="M2 15h4"></path>
+                <path d="M18 9h4"></path>
+                <path d="M18 15h4"></path>
+                <path d="M10 10h4v4h-4z"></path>
+              </svg>
+            </div>
+            <h3>Communication System</h3>
+            <p>I like breaking down problems, debugging issues, learning new tools, and explaining technical work in a way people can understand.</p>
+            <button class="mission-btn" data-xp="25" data-achievement="Communication System Online">Activate System</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills">
+      <div class="container">
+        <div class="section-heading reveal">
+          <div class="kicker">Skill Database</div>
+          <h2>Unlock technical skill badges.</h2>
+          <p>Click the badges to interact with the portfolio and reveal the tools I use to code, analyze, build, and communicate.</p>
+        </div>
+
+        <div class="skills-board">
+          <div class="card skill-box reveal">
+            <div class="icon">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M4 19V5"></path>
+                <path d="M4 19h16"></path>
+                <path d="M7 15l4-4 3 3 5-7"></path>
+                <path d="M16 7h3v3"></path>
+              </svg>
+            </div>
+            <h3>Data Analysis</h3>
+            <ul>
+              <li>Data Cleaning</li>
+              <li>SQL Queries</li>
+              <li>Data Visualization</li>
+              <li>KPI Validation</li>
+            </ul>
+          </div>
+
+          <div class="card skill-box reveal">
+            <div class="icon">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <rect x="3" y="7" width="18" height="13" rx="2"></rect>
+                <path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                <path d="M3 12h18"></path>
+                <path d="M10 12v2h4v-2"></path>
+              </svg>
+            </div>
+            <h3>Analytics Tools</h3>
+            <ul>
+              <li>Excel</li>
+              <li>Power BI</li>
+              <li>SQL</li>
+              <li>RStudio</li>
+              <li>Tableau</li>
+            </ul>
+          </div>
+
+          <div class="card skill-box reveal">
+            <div class="icon">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <rect x="4" y="5" width="16" height="11" rx="2"></rect>
+                <path d="M8 20h8"></path>
+                <path d="M12 16v4"></path>
+                <path d="M10 9l-2 2 2 2"></path>
+                <path d="M14 9l2 2-2 2"></path>
+              </svg>
+            </div>
+            <h3>Programming</h3>
+            <ul>
+              <li>Python</li>
+              <li>R</li>
+              <li>JavaScript</li>
+              <li>Java / C++</li>
+              <li>MATLAB</li>
+            </ul>
+          </div>
+
+          <div class="card skill-box reveal">
+            <div class="icon">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M4 6h16v12H4z"></path>
+                <path d="M4 10h16"></path>
+                <path d="M4 14h16"></path>
+                <path d="M8 6v4"></path>
+                <path d="M16 6v4"></path>
+                <path d="M12 10v4"></path>
+                <path d="M8 14v4"></path>
+                <path d="M16 14v4"></path>
+              </svg>
+            </div>
+            <h3>Development</h3>
+            <ul>
+              <li>HTML & CSS</li>
+              <li>React</li>
+              <li>Go Backend</li>
+              <li>PostgreSQL</li>
+              <li>Docker</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="skill-token-board reveal">
+          <h3>Interactive Skill Badges</h3>
+          <p>Each badge gives XP once. This keeps the portfolio interactive while still looking professional.</p>
+          <div class="token-wrap">
+            <button class="skill-token" data-xp="10" data-achievement="SQL Badge">SQL</button>
+            <button class="skill-token" data-xp="10" data-achievement="Power BI Badge">Power BI</button>
+            <button class="skill-token" data-xp="10" data-achievement="Excel Badge">Excel</button>
+            <button class="skill-token" data-xp="10" data-achievement="Python Badge">Python</button>
+            <button class="skill-token" data-xp="10" data-achievement="React Badge">React</button>
+            <button class="skill-token" data-xp="10" data-achievement="Go Badge">Go</button>
+            <button class="skill-token" data-xp="10" data-achievement="R Shiny Badge">R Shiny</button>
+            <button class="skill-token" data-xp="10" data-achievement="PostgreSQL Badge">PostgreSQL</button>
+            <button class="skill-token" data-xp="10" data-achievement="pandas Badge">pandas</button>
+            <button class="skill-token" data-xp="10" data-achievement="Docker Badge">Docker</button>
+            <button class="skill-token" data-xp="10" data-achievement="Tableau Badge">Tableau</button>
+            <button class="skill-token" data-xp="10" data-achievement="Hackathon Badge">Hackathon</button>
+            <button class="skill-token" data-xp="10" data-achievement="Google Data Analytics Badge">Google Data Analytics</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects">
+      <div class="container">
+        <div class="section-heading reveal">
+          <div class="kicker">Project Lab</div>
+          <h2>Inspect active project modules.</h2>
+          <p>Each project card has hidden system details you can reveal. This gives the site a high-tech interactive portfolio feel.</p>
+        </div>
+
+        <div class="project-grid">
+          <div class="card project-card reveal">
+            <div class="project-top">
+              <div class="project-number">01</div>
+              <div class="project-badge">Data Analytics</div>
+            </div>
+            <h3>Retail Revenue Dashboard</h3>
+            <div class="project-visual dashboard-preview">
+              <div class="preview-top"><span></span><span></span><span></span></div>
+              <div class="dashboard-layout">
+                <div class="dashboard-sidebar"></div>
+                <div class="dashboard-main">
+                  <div class="mini-kpis"><span></span><span></span><span></span></div>
+                  <svg class="mini-chart-svg" viewBox="0 0 260 70" aria-hidden="true">
+                    <path d="M18 55 L58 35 L95 43 L134 22 L176 30 L222 12" stroke="rgba(56,232,255,0.9)" stroke-width="3" fill="none"></path>
+                    <path d="M18 55 L58 35 L95 43 L134 22 L176 30 L222 12 L222 64 L18 64 Z" fill="rgba(56,232,255,0.12)"></path>
+                    <rect x="28" y="45" width="12" height="20" fill="rgba(247,201,72,0.6)"></rect>
+                    <rect x="76" y="36" width="12" height="29" fill="rgba(247,201,72,0.45)"></rect>
+                    <rect x="156" y="28" width="12" height="37" fill="rgba(247,201,72,0.55)"></rect>
+                    <circle cx="134" cy="22" r="4" fill="white"></circle>
+                  </svg>
+                </div>
+              </div>
+            </div>
+            <div class="tech-stack">SQL · Python · pandas · Power BI · SQLite</div>
+            <p>
+              Built a Power BI dashboard analyzing 500,000+ retail transactions across revenue, retention, products, and country sales.
+            </p>
+            <button class="unlock-btn" data-xp="20" data-achievement="Retail Dashboard Unlocked">Inspect Module</button>
+            <div class="project-details">
+              <ul>
+                <li>Cleaned data using Python and pandas</li>
+                <li>Wrote SQL queries to validate revenue, AOV, and repeat customer KPIs</li>
+                <li>Designed dashboard views for revenue, retention, products, and country sales</li>
+              </ul>
+            </div>
+            <div class="project-links">
+              <a href="#" target="_blank">View Project</a>
+              <a href="#" target="_blank">GitHub</a>
+            </div>
+          </div>
+
+          <div class="card project-card reveal">
+            <div class="project-top">
+              <div class="project-number">02</div>
+              <div class="project-badge">Data App</div>
+            </div>
+            <h3>Global Internet Adoption Dashboard</h3>
+            <div class="project-visual globe-preview">
+              <div class="globe-wrap">
+                <div class="orbit"></div>
+                <span class="node one"></span>
+                <span class="node two"></span>
+                <span class="node three"></span>
+                <span class="node four"></span>
+              </div>
+            </div>
+            <div class="tech-stack">RStudio · R Shiny · ggplot2 · Plotly · Excel</div>
+            <p>
+              Built an interactive dashboard analyzing global internet adoption and social connection trends across countries, regions, income groups, and years. The live Shiny app is available for users to explore the visualizations directly.
+            </p>
+            <button class="unlock-btn" data-xp="20" data-achievement="Data App Unlocked">Inspect Module</button>
+            <div class="project-details">
+              <ul>
+                <li>Cleaned, transformed, and organized multi-source datasets</li>
+                <li>Created filters, summary cards, visualizations, and key findings</li>
+                <li>Deployed the project as a live R Shiny dashboard for interactive exploration</li>
+                <li>Presented insights responsibly by explaining correlations without unsupported causal claims</li>
+              </ul>
+            </div>
+            <div class="project-links">
+              <a href="https://brianl37.shinyapps.io/projfinal/" target="_blank">Live Dashboard</a>
+              <a href="#" target="_blank">GitHub</a>
+            </div>
+          </div>
+
+          <div class="card project-card reveal">
+            <div class="project-top">
+              <div class="project-number">03</div>
+              <div class="project-badge">Full-Stack Dev</div>
+            </div>
+            <h3>Kill the Hero — Trading Card Game Capstone</h3>
+            <div class="project-visual tcg-preview">
+              <img src="pic1.jpg" alt="Kill the Hero main menu screenshot" class="project-screenshot kth-main-shot" />
+            </div>
+            <div class="screenshot-gallery">
+              <img src="pic1.jpg" alt="Kill the Hero main menu" class="screenshot-thumb kth-thumb" data-target="pic1.jpg" />
+              <img src="pic2.jpg" alt="Kill the Hero starter deck selection" class="screenshot-thumb kth-thumb" data-target="pic2.jpg" />
+              <img src="pic3.jpg" alt="Kill the Hero gameplay tutorial" class="screenshot-thumb kth-thumb" data-target="pic3.jpg" />
+            </div>
+            <div class="tech-stack">React · Go · PostgreSQL · WebSockets · Docker</div>
+            <p>
+              Developed full-stack gameplay features for a web-based trading card game with starter decks, tutorial flow, real-time multiplayer functionality, and AI-controlled bots.
+            </p>
+            <button class="unlock-btn" data-xp="20" data-achievement="Full-Stack Project Unlocked">Inspect Module</button>
+            <div class="project-details">
+              <ul>
+                <li>Developed gameplay features using React, Go, PostgreSQL, and REST APIs</li>
+                <li>Designed and implemented UI flows for the title screen, starter deck selection, and gameplay tutorial</li>
+                <li>Built real-time multiplayer functionality with WebSockets and AI-controlled bots</li>
+                <li>Used Docker and Docker Compose for consistent local development and testing</li>
+              </ul>
+            </div>
+            <div class="project-links">
+              <a href="#" target="_blank">View Project</a>
+              <a href="#" target="_blank">GitHub</a>
+            </div>
+          </div>
+
+          <div class="card project-card reveal">
+            <div class="project-top">
+              <div class="project-number">04</div>
+              <div class="project-badge">Hackathon</div>
+            </div>
+            <h3>SolHack Task Management Web App</h3>
+            <div class="project-visual dashboard-preview">
+              <div class="preview-top"><span></span><span></span><span></span></div>
+              <div class="dashboard-layout">
+                <div class="dashboard-sidebar"></div>
+                <div class="dashboard-main">
+                  <div class="mini-kpis"><span></span><span></span><span></span></div>
+                  <svg class="mini-chart-svg" viewBox="0 0 260 70" aria-hidden="true">
+                    <path d="M28 22h72" stroke="rgba(56,232,255,0.9)" stroke-width="3" fill="none"></path>
+                    <path d="M28 42h98" stroke="rgba(56,232,255,0.55)" stroke-width="3" fill="none"></path>
+                    <path d="M28 58h54" stroke="rgba(247,201,72,0.8)" stroke-width="3" fill="none"></path>
+                    <rect x="156" y="14" width="70" height="48" rx="8" fill="rgba(56,232,255,0.12)" stroke="rgba(56,232,255,0.45)"></rect>
+                    <path d="M168 28h46" stroke="rgba(255,255,255,0.55)" stroke-width="3"></path>
+                    <path d="M168 43h28" stroke="rgba(247,201,72,0.75)" stroke-width="3"></path>
+                  </svg>
+                </div>
+              </div>
+            </div>
+            <div class="tech-stack">HTML · CSS · JavaScript · Responsive UI</div>
+            <p>
+              Built a hybrid task management and project planning web app at SolHack Hackathon with interactive to-do lists, calendar scheduling, and reward-based task completion.
+            </p>
+            <button class="unlock-btn" data-xp="20" data-achievement="Hackathon Project Unlocked">Inspect Module</button>
+            <div class="project-details">
+              <ul>
+                <li>Represented SHPE at SolHack Hackathon at UNC Chapel Hill in March 2025</li>
+                <li>Referenced the public LinkedIn event post to verify and showcase the experience</li>
+                <li>Built interactive to-do lists and dynamic calendar scheduling features</li>
+                <li>Designed responsive UI with color-coded task organization and gamified rewards</li>
+              </ul>
+            </div>
+            <div class="project-links">
+              <a href="https://www.linkedin.com/posts/brian-lee-74669b223_had-an-incredible-time-attending-the-first-activity-7312278918495907840--Yy9?utm_source=share&utm_medium=member_desktop&rcm=ACoAADgqH2YBfp554Jv8JXkgHvZmFHZa8h4YaT0" target="_blank">LinkedIn Post</a>
+              <a href="https://github.com/BrianL37/hackathon.git" target="_blank">GitHub</a>
+            </div>
+          </div>
+
+          <div class="card project-card reveal">
+            <div class="project-top">
+              <div class="project-number">05</div>
+              <div class="project-badge">Java App</div>
+            </div>
+            <h3>Language Learning App</h3>
+            <div class="project-visual tcg-preview">
+              <div class="game-board">
+                <div class="game-card-mini"></div>
+                <div class="game-card-mini"></div>
+                <div class="game-card-mini"></div>
+                <div class="game-card-mini"></div>
+                <div class="game-card-mini"></div>
+              </div>
+            </div>
+            <div class="tech-stack">Java · JavaFX · JSON · Text-to-Speech</div>
+            <p>
+              Built a gamified board-style app to help students learn Spanish through interactive lessons, games, progress tracking, and narration. A demo video is available to show the app experience in action.
+            </p>
+
+            <div class="video-embed-card">
+              <h4>App Demo Video</h4>
+              <div class="video-embed-wrap">
+                <iframe src="https://www.youtube.com/embed/V70Di7_UhDQ" title="Language Learning App Demo" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+              </div>
+            </div>
+            <button class="unlock-btn" data-xp="20" data-achievement="Java App Unlocked">Inspect Module</button>
+            <div class="project-details">
+              <ul>
+                <li>Designed flashcards, matching, multiple choice, and fill-in-the-blank learning games</li>
+                <li>Integrated text-to-speech narration for auditory learning</li>
+                <li>Implemented JSON-based data persistence for user progress and app data</li>
+                <li>Included a YouTube demo video to showcase the app experience</li>
+              </ul>
+            </div>
+            <div class="project-links">
+              <a href="https://www.youtube.com/watch?v=V70Di7_UhDQ" target="_blank">Demo Video</a>
+              <a href="https://github.com/BrianL37/LanguageLearningAppFrontEnd.git" target="_blank">GitHub</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="achievement-grid reveal">
+          <div class="achievement" data-achievement-card="Command Center Entered"><strong>Command Center</strong><span>Entered the project lab.</span></div>
+          <div class="achievement" data-achievement-card="Data System Online"><strong>Data System</strong><span>Activated analysis system.</span></div>
+          <div class="achievement" data-achievement-card="Code System Online"><strong>Code System</strong><span>Activated development system.</span></div>
+          <div class="achievement" data-achievement-card="Project Detail Unlocked"><strong>Module Inspector</strong><span>Inspected a project module.</span></div>
+          <div class="achievement" data-achievement-card="Hackathon Project Unlocked"><strong>Hackathon Builder</strong><span>Inspected the SolHack project.</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="resume">
+      <div class="container">
+        <div class="resume-band reveal">
+          <div>
+            <h2>Retrieve the resume file.</h2>
+            <p>Download my resume to see my education, technical skills, projects, and experience in a clean one-page format.</p>
+          </div>
+          <a href="resume.pdf" class="btn btn-primary award-xp" data-xp="20" data-achievement="Resume Retrieved" target="_blank">Download Resume</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="container">
+        <div class="contact-card reveal">
+          <h2>Open communication channel.</h2>
+          <p>
+            I am open to entry-level data analyst, business analyst, software development, and technology-related roles. I am excited to keep learning, contribute to meaningful projects, and bring coding, analytical thinking, and creative problem-solving to a team.
+          </p>
+          <div class="contact-links">
+            <a href="mailto:brianthanhlee@gmail.com" class="award-xp" data-xp="15" data-achievement="Contact Channel Opened">Email</a>
+            <a href="https://github.com/brianthanhlee" class="award-xp" data-xp="15" data-achievement="Source Code Accessed" target="_blank">GitHub</a>
+            <a href="https://www.linkedin.com/in/brian-lee-74669b223/" class="award-xp" data-xp="15" data-achievement="Network Channel Opened" target="_blank">LinkedIn</a>
+            <a href="resume.pdf" class="award-xp" data-xp="20" data-achievement="Resume Retrieved" target="_blank">Resume</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>&copy; 2026 Brian Lee. Built with tech, data, code, and creative engineering.</p>
+    </div>
+  </footer>
+
+  <div class="toast" id="toast">
+    <strong id="toastTitle">System Update</strong>
+    <span id="toastMessage">XP added.</span>
+  </div>
+
+  <script>
+    document.body.classList.add('js-enabled');
+
+    let xp = Number(localStorage.getItem('portfolioXP')) || 0;
+    const unlocked = new Set(JSON.parse(localStorage.getItem('portfolioAchievements') || '[]'));
+    const clickedButtons = new Set(JSON.parse(localStorage.getItem('portfolioClicked') || '[]'));
+
+    const xpFill = document.getElementById('xpFill');
+    const xpText = document.getElementById('xpText');
+    const xpTitle = document.getElementById('xpTitle');
+    const navXpText = document.getElementById('navXpText');
+    const navXpFill = document.getElementById('navXpFill');
+    const toast = document.getElementById('toast');
+    const toastTitle = document.getElementById('toastTitle');
+    const toastMessage = document.getElementById('toastMessage');
+
+    const typeLine = document.getElementById('typeLine');
+    const typePhrases = [
+      'Loading analytics systems...',
+      'Scanning software development modules...',
+      'Calibrating dashboard interface...',
+      'Portfolio command center online.'
+    ];
+    let phraseIndex = 0;
+    let letterIndex = 0;
+    let deleting = false;
+
+    function typeEffect() {
+      const phrase = typePhrases[phraseIndex];
+      if (!deleting) {
+        typeLine.textContent = phrase.slice(0, letterIndex + 1) + '▌';
+        letterIndex++;
+        if (letterIndex === phrase.length) {
+          deleting = true;
+          setTimeout(typeEffect, 1100);
+          return;
+        }
+      } else {
+        typeLine.textContent = phrase.slice(0, letterIndex - 1) + '▌';
+        letterIndex--;
+        if (letterIndex === 0) {
+          deleting = false;
+          phraseIndex = (phraseIndex + 1) % typePhrases.length;
+        }
+      }
+      setTimeout(typeEffect, deleting ? 35 : 55);
+    }
+
+    function getLevelInfo(points) {
+      if (points >= 220) return { level: 4, title: 'Systems Architect', next: 'Max Level', progress: 100 };
+      if (points >= 150) return { level: 3, title: 'Full-Stack Analyst', next: 'Systems Architect', progress: ((points - 150) / 70) * 100 };
+      if (points >= 80) return { level: 2, title: 'Data Builder', next: 'Full-Stack Analyst', progress: ((points - 80) / 70) * 100 };
+      return { level: 1, title: 'Tech Explorer', next: 'Data Builder', progress: (points / 80) * 100 };
+    }
+
+    function saveGameState() {
+      localStorage.setItem('portfolioXP', String(xp));
+      localStorage.setItem('portfolioAchievements', JSON.stringify([...unlocked]));
+      localStorage.setItem('portfolioClicked', JSON.stringify([...clickedButtons]));
+    }
+
+    function updateXPUI() {
+      const info = getLevelInfo(xp);
+      const currentMax = info.level === 1 ? 80 : info.level === 2 ? 150 : info.level === 3 ? 220 : xp;
+      const currentMin = info.level === 1 ? 0 : info.level === 2 ? 80 : info.level === 3 ? 150 : 220;
+      const currentProgressText = info.level === 4 ? 'MAX LEVEL' : `${xp - currentMin} / ${currentMax - currentMin} XP`;
+
+      xpText.textContent = currentProgressText;
+      xpTitle.textContent = info.level === 4 ? 'All major systems online' : `Next: ${info.next}`;
+      navXpText.textContent = `LVL ${info.level} · ${xp} XP`;
+      xpFill.style.width = `${Math.min(info.progress, 100)}%`;
+      navXpFill.style.width = `${Math.min(info.progress, 100)}%`;
+
+      document.querySelectorAll('[data-achievement-card]').forEach((card) => {
+        if (unlocked.has(card.dataset.achievementCard)) {
+          card.classList.add('unlocked');
+        }
+      });
+    }
+
+    function showToast(title, message) {
+      toastTitle.textContent = title;
+      toastMessage.textContent = message;
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 2600);
+    }
+
+    function awardXP(amount, achievement, uniqueId) {
+      if (uniqueId && clickedButtons.has(uniqueId)) {
+        showToast('System Notice', 'XP for this action was already collected.');
+        return;
+      }
+
+      if (uniqueId) clickedButtons.add(uniqueId);
+      xp += amount;
+      unlocked.add(achievement);
+      saveGameState();
+      updateXPUI();
+      showToast('Achievement Unlocked', `${achievement} · +${amount} XP`);
+    }
+
+    document.querySelectorAll('.award-xp').forEach((element, index) => {
+      element.addEventListener('click', () => {
+        const amount = Number(element.dataset.xp) || 10;
+        const achievement = element.dataset.achievement || 'Portfolio Action';
+        const uniqueId = `award-${achievement}-${index}`;
+        awardXP(amount, achievement, uniqueId);
+      });
+    });
+
+    document.querySelectorAll('.mission-btn').forEach((button, index) => {
+      button.addEventListener('click', () => {
+        const missionCard = button.closest('.mission-card');
+        const mission = missionCard.dataset.mission;
+        missionCard.classList.add('complete');
+        button.textContent = 'System Online';
+
+        if (mission === 'data') document.getElementById('questData').textContent = 'ONLINE';
+        if (mission === 'code') document.getElementById('questCode').textContent = 'ONLINE';
+        if (mission === 'story') document.getElementById('questStory').textContent = 'ONLINE';
+
+        awardXP(Number(button.dataset.xp) || 25, button.dataset.achievement, `mission-${index}`);
+      });
+    });
+
+    document.querySelectorAll('.skill-token').forEach((button, index) => {
+      button.addEventListener('click', () => {
+        button.classList.add('unlocked');
+        awardXP(Number(button.dataset.xp) || 10, button.dataset.achievement, `skill-${index}`);
+      });
+
+      if (clickedButtons.has(`skill-${index}`)) {
+        button.classList.add('unlocked');
+      }
+    });
+
+    document.querySelectorAll('.unlock-btn').forEach((button, index) => {
+      button.addEventListener('click', () => {
+        const details = button.nextElementSibling;
+        details.classList.toggle('open');
+        button.textContent = details.classList.contains('open') ? 'Close Module' : 'Inspect Module';
+        awardXP(Number(button.dataset.xp) || 20, button.dataset.achievement, `project-${index}`);
+      });
+    });
+
+    const revealElements = document.querySelectorAll('.reveal');
+
+    if ('IntersectionObserver' in window) {
+      const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('active');
+            revealObserver.unobserve(entry.target);
+          }
+        });
+      }, {
+        threshold: 0.08,
+        rootMargin: '0px 0px -40px 0px'
+      });
+
+      revealElements.forEach((element) => revealObserver.observe(element));
+    } else {
+      revealElements.forEach((element) => element.classList.add('active'));
+    }
+
+    setTimeout(() => {
+      revealElements.forEach((element) => element.classList.add('active'));
+    }, 900);
+
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('nav a[href^="#"]');
+
+    function updateActiveNav() {
+      let current = '';
+
+      sections.forEach((section) => {
+        const sectionTop = section.offsetTop - 130;
+        if (window.scrollY >= sectionTop) {
+          current = section.getAttribute('id');
+        }
+      });
+
+      navLinks.forEach((link) => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === `#${current}`) {
+          link.classList.add('active');
+        }
+      });
+    }
+
+    window.addEventListener('scroll', updateActiveNav);
+    updateActiveNav();
+
+    document.querySelectorAll('.kth-thumb').forEach((thumb) => {
+      thumb.addEventListener('click', () => {
+        const mainShot = document.querySelector('.kth-main-shot');
+        if (mainShot) {
+          mainShot.src = thumb.dataset.target;
+          mainShot.alt = thumb.alt;
+          showToast('Project Image Updated', 'Kill the Hero screenshot preview changed.');
+        }
+      });
+    });
+
+    const aiConsole = document.getElementById('aiConsole');
+
+    if (aiConsole) {
+      aiConsole.addEventListener('mousemove', (event) => {
+        const rect = aiConsole.getBoundingClientRect();
+        const x = event.clientX - rect.left;
+        const y = event.clientY - rect.top;
+        const rotateX = ((y / rect.height) - 0.5) * -7;
+        const rotateY = ((x / rect.width) - 0.5) * 7;
+        aiConsole.style.transform = `perspective(900px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+      });
+
+      aiConsole.addEventListener('mouseleave', () => {
+        aiConsole.style.transform = 'perspective(900px) rotateX(0deg) rotateY(0deg)';
+      });
+    }
+
+    updateXPUI();
+    typeEffect();
+  </script>
+</body>
+</html>
